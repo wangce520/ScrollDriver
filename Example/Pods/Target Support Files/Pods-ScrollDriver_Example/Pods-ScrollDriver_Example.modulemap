@@ -1,0 +1,6 @@
+framework module Pods_ScrollDriver_Example {
+  umbrella header "Pods-ScrollDriver_Example-umbrella.h"
+
+  export *
+  module * { export * }
+}

@@ -1,0 +1,6 @@
+framework module ScrollDriver {
+  umbrella header "ScrollDriver-umbrella.h"
+
+  export *
+  module * { export * }
+}

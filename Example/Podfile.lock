@@ -1,0 +1,16 @@
+PODS:
+  - ScrollDriver (0.1.0)
+
+DEPENDENCIES:
+  - ScrollDriver (from `../`)
+
+EXTERNAL SOURCES:
+  ScrollDriver:
+    :path: "../"
+
+SPEC CHECKSUMS:
+  ScrollDriver: 7f407ca796135aae42818606c98988e6009be9ff
+
+PODFILE CHECKSUM: b416efc30e62ecb7c7a4553ede78a561eabb29d3
+
+COCOAPODS: 1.11.3
