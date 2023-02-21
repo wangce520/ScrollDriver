@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "summary": "A short description of ScrollDriver.",
   "description": "TODO: Add long description of the pod here.",
-  "homepage": "https://github.com/王策/ScrollDriver",
+  "homepage": "https://github.com/wangce520/",
   "license": {
     "type": "MIT",
     "file": "LICENSE"
@@ -12,7 +12,7 @@
     "王策": "cjxy_wce@163.com"
   },
   "source": {
-    "git": "https://github.com/王策/ScrollDriver.git",
+    "git": "https://github.com/wangce520/ScrollDriver.git",
     "tag": "0.1.0"
   },
   "platforms": {
