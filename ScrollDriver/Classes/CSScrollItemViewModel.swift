@@ -27,12 +27,16 @@ public class CSScrollItemViewModel {
     /// 绑定的选中事件
     var selectedAction : ((Any) -> Void)? = nil
     
-    init(viewTag: Int = 0, viewClass: AnyClass, dataModel: Any, eventAction: ((Int, Any) -> Any?)? = nil, selectedAction: ((Any) -> Void)? = nil) {
+    /// 绑定的代理
+    var delegate : Any?
+    
+    init(viewTag: Int = 0, viewClass: AnyClass, dataModel: Any, eventAction: ((Int, Any) -> Any?)? = nil, selectedAction: ((Any) -> Void)? = nil, delegate : Any? = nil) {
         self.viewTag = viewTag
         self.viewClass = viewClass
         self.dataModel = dataModel
         self.eventAction = eventAction
         self.selectedAction = selectedAction
+        self.delegate = delegate
         
         // 更新view的视图大小
         updateViewSize()
@@ -53,8 +57,16 @@ public class CSScrollItemViewModel {
     
     /// 配置数据
     func excuteConfigAction(_ itemView : CSScrollItemViewProtocol) {
-        itemView.configDataModel?(self.dataModel)       // 配置数据
-        itemView.configEventAction?(self.eventAction)   // 配置点击事件
+        // 配置数据
+        itemView.configDataModel?(self.dataModel)
+        // 配置点击事件
+        if let eventAction = self.eventAction {
+            itemView.configEventAction?(eventAction)
+        }
+        // 配置代理
+        if let delegate = self.delegate {
+            itemView.configDelegate?(delegate)
+        }
     }
     
     /// 获取size

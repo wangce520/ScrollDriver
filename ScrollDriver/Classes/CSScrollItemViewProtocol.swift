@@ -16,6 +16,9 @@ import UIKit
     @objc optional func configDataModel(_ dataModel : Any)
     
     /// 设置点击回调
-    @objc optional func configEventAction(_ eventAction : ((Int, Any) -> Any?)?)
+    @objc optional func configEventAction(_ eventAction : ((Int, Any) -> Any?))
+    
+    /// 设置自定义代理
+    @objc optional func configDelegate(_ delegate : Any)
 
 }

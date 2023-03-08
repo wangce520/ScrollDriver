@@ -103,9 +103,9 @@ public class CSScrollDriver : NSObject {
     // MARK: - Header&Footer CURD
     
     /// 设置HeaderViewModel
-    public func addHeaderToSection(_ sectionTag : Int, viewClass: AnyClass, dataModel: Any, eventAction:((Int, Any) -> Any?)? = nil) {
+    public func addHeaderToSection(_ sectionTag : Int, viewClass: AnyClass, dataModel: Any, eventAction:((Int, Any) -> Any?)? = nil, delegate : Any? = nil) {
         guard let sectionViewModel = sectionViewModelForTag(sectionTag) else { return }
-        let viewModel = CSScrollItemViewModel(viewTag : 0 ,viewClass: viewClass, dataModel: dataModel, eventAction: eventAction, selectedAction: nil)
+        let viewModel = CSScrollItemViewModel(viewTag : 0 ,viewClass: viewClass, dataModel: dataModel, eventAction: eventAction, selectedAction: nil,delegate: delegate)
         sectionViewModel.headerViewModel = viewModel
         
         // 注册Header
@@ -113,9 +113,9 @@ public class CSScrollDriver : NSObject {
     }
     
     /// 设置FooterViewModel
-    public func addFooterToSection(_ sectionTag : Int, viewClass: AnyClass, dataModel: Any, eventAction:((Int, Any) -> Any?)? = nil) {
+    public func addFooterToSection(_ sectionTag : Int, viewClass: AnyClass, dataModel: Any, eventAction:((Int, Any) -> Any?)? = nil, delegate : Any? = nil) {
         guard let sectionViewModel = sectionViewModelForTag(sectionTag) else { return }
-        let viewModel = CSScrollItemViewModel(viewTag : 0, viewClass: viewClass, dataModel: dataModel, eventAction: eventAction, selectedAction: nil)
+        let viewModel = CSScrollItemViewModel(viewTag : 0, viewClass: viewClass, dataModel: dataModel, eventAction: eventAction, selectedAction: nil, delegate: delegate)
         sectionViewModel.footerViewModel = viewModel
         
         // 注册Footer
@@ -137,9 +137,11 @@ public class CSScrollDriver : NSObject {
     // MARK: - Cell CURD
     
     /// section添加cell
-    public func addCellToSection(_ sectionTag : Int, viewTag : Int = 0, viewClass: AnyClass, dataModel: Any, eventAction:((Int, Any) -> Any?)? = nil, selectedAction:((Any) -> Void)? = nil) {
+    public func addCellToSection(_ sectionTag : Int, viewTag : Int = 0, viewClass: AnyClass, dataModel: Any, eventAction:((Int, Any) -> Any?)? = nil, selectedAction:((Any) -> Void)? = nil,
+        delegate:AnyObject? = nil
+        ) {
         guard let sectionViewModel = sectionViewModelForTag(sectionTag) else { return }
-        let viewModel = CSScrollItemViewModel(viewTag : viewTag ,viewClass: viewClass, dataModel: dataModel, eventAction: eventAction, selectedAction: selectedAction)
+        let viewModel = CSScrollItemViewModel(viewTag : viewTag ,viewClass: viewClass, dataModel: dataModel, eventAction: eventAction, selectedAction: selectedAction, delegate: delegate)
         sectionViewModel.addObject(viewModel)
         // 注册cell
         registerHostViewCell(hostView, viewClass: viewModel.viewClass, reuseIdentifier: viewModel.reuseIndentifier())
