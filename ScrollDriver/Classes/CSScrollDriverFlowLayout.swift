@@ -122,7 +122,7 @@ public class CSScrollDriverFlowLayout : UICollectionViewFlowLayout {
         }
         
         for attributes in supperArray {
-            if attributes.representedElementKind == UICollectionElementKindSectionHeader {
+            if attributes.representedElementKind == UICollectionView.elementKindSectionHeader {
                 noneHeaderSections.remove(attributes.indexPath.section)
             }
         }
@@ -130,7 +130,7 @@ public class CSScrollDriverFlowLayout : UICollectionViewFlowLayout {
         for sectionIndex in noneHeaderSections {
             if collectionView.numberOfItems(inSection: sectionIndex) > 0 {
                 let indexPath = IndexPath(item: 0, section: sectionIndex)
-                if let attributes = layoutAttributesForDecorationView(ofKind: UICollectionElementKindSectionHeader, at: indexPath){
+                if let attributes = layoutAttributesForDecorationView(ofKind: UICollectionView.elementKindSectionHeader, at: indexPath){
                     supperArray.append(attributes)
                 }
             }
@@ -139,7 +139,7 @@ public class CSScrollDriverFlowLayout : UICollectionViewFlowLayout {
         // 遍历superArray，改变header结构信息中的参数，使它可以在当前section还没完全离开屏幕的时候一直显示
         guard let viewDelegate = collectionView.delegate as? CSScrollDriverFlowLayoutDelegate else { return }
         for attributes in supperArray {
-            if attributes.representedElementKind == UICollectionElementKindSectionHeader {
+            if attributes.representedElementKind == UICollectionView.elementKindSectionHeader {
                 let section = attributes.indexPath.section
                 let numberofItemsInSection = collectionView.numberOfItems(inSection: section)
                 

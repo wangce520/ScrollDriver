@@ -28,8 +28,8 @@ public class CSScrollDriver : NSObject {
             (hostView as! UICollectionView).delegate = self
             
             // 注册空白的Header&Footer
-            registerHostViewReusableView(hostView, kind: UICollectionElementKindSectionHeader, viewClass: UICollectionReusableView.self, reuseIdentifier: "UICollectionReusableView")
-            registerHostViewReusableView(hostView, kind: UICollectionElementKindSectionFooter, viewClass: UICollectionReusableView.self, reuseIdentifier: "UICollectionReusableView")
+            registerHostViewReusableView(hostView, kind: UICollectionView.elementKindSectionHeader, viewClass: UICollectionReusableView.self, reuseIdentifier: "UICollectionReusableView")
+            registerHostViewReusableView(hostView, kind: UICollectionView.elementKindSectionFooter, viewClass: UICollectionReusableView.self, reuseIdentifier: "UICollectionReusableView")
         }        
     }
     
@@ -109,7 +109,7 @@ public class CSScrollDriver : NSObject {
         sectionViewModel.headerViewModel = viewModel
         
         // 注册Header
-        registerHostViewReusableView(hostView, kind: UICollectionElementKindSectionHeader, viewClass: viewModel.viewClass, reuseIdentifier: viewModel.reuseIndentifier())
+        registerHostViewReusableView(hostView, kind: UICollectionView.elementKindSectionHeader, viewClass: viewModel.viewClass, reuseIdentifier: viewModel.reuseIndentifier())
     }
     
     /// 设置FooterViewModel
@@ -119,7 +119,7 @@ public class CSScrollDriver : NSObject {
         sectionViewModel.footerViewModel = viewModel
         
         // 注册Footer
-        registerHostViewReusableView(hostView, kind: UICollectionElementKindSectionFooter, viewClass: viewModel.viewClass, reuseIdentifier: viewModel.reuseIndentifier())
+        registerHostViewReusableView(hostView, kind: UICollectionView.elementKindSectionFooter, viewClass: viewModel.viewClass, reuseIdentifier: viewModel.reuseIndentifier())
     }
     
     /// 移除Header

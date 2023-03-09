@@ -36,7 +36,7 @@ extension CSScrollDriver : UICollectionViewDataSource, UICollectionViewDelegate 
     public func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
         let sectionViewModel = sectionViewModelForIndex(indexPath.section)!
         // 如果有值
-        if let viewModel = (kind == UICollectionElementKindSectionHeader ? sectionViewModel.headerViewModel : sectionViewModel.footerViewModel) {
+        if let viewModel = (kind == UICollectionView.elementKindSectionHeader ? sectionViewModel.headerViewModel : sectionViewModel.footerViewModel) {
             let view = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: viewModel.reuseIndentifier(), for: indexPath)
             if let _view = view as? CSScrollItemViewProtocol {
                 viewModel.excuteConfigAction(_view)
