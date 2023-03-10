@@ -74,17 +74,16 @@ public class CSScrollItemViewModel {
         var width = viewSize.width
         if width < 0 {
             let viewWidth = hostView.frame.size.width - sectionInsets.left - sectionInsets.right
-            width = viewWidth * -width
+            width = viewWidth
         }
-        width = max(width, 0.00001)
+        width = max(width, 0)
         
         var height = viewSize.height
         if height < 0 {
-            height = hostView.frame.size.height * -height
+            height = hostView.frame.size.height
         }
-        height = max(height, 0.00001)
-        
-        return CGSizeMake(CGFloat(Int(width)), CGFloat(Int(height)))
+        height = max(height, 0)
+        return CGSizeMake(width, height)
     }
     
     /// 触发selection

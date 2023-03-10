@@ -65,7 +65,7 @@ extension CSScrollDriver : UITableViewDataSource, UITableViewDelegate {
     // 设置FooterView的高度
     public func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
         let sectionViewModel = data[section]
-        guard let viewModel = sectionViewModel.footerViewModel else { return 0 }
+        guard let viewModel = sectionViewModel.footerViewModel else { return CGFloat.leastNormalMagnitude }
         return viewModel.visableSizeFor(self.hostView).height
     }
     

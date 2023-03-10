@@ -10,7 +10,8 @@ import Foundation
 public class CSScrollDriver : NSObject {
     
     /// 持有的scrollView
-    unowned var hostView : UIScrollView!
+    public unowned var hostView : UIScrollView!
+    public unowned var scrollViewDelegate : UIScrollViewDelegate?
     
     /// 持有的数据
     var data : [CSScrollSectionViewModel] = []
@@ -190,3 +191,12 @@ public class CSScrollDriver : NSObject {
 
 }
 
+
+extension CSScrollDriver : UIScrollViewDelegate {
+    
+    public func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        if let scrollViewDelegate = self.scrollViewDelegate{
+            scrollViewDelegate.scrollViewDidScroll?(scrollView)
+        }
+    }
+}
