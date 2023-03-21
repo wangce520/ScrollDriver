@@ -55,20 +55,6 @@ public class CSScrollItemViewModel {
         return NSStringFromClass(self.viewClass)
     }
     
-    /// 配置数据
-    func excuteConfigAction(_ itemView : CSScrollItemViewProtocol) {
-        // 配置数据
-        itemView.configDataModel?(self.dataModel)
-        // 配置点击事件
-        if let eventAction = self.eventAction {
-            itemView.configEventAction?(eventAction)
-        }
-        // 配置代理
-        if let delegate = self.delegate {
-            itemView.configDelegate?(delegate)
-        }
-    }
-    
     /// 获取size
     func visableSizeFor(_ hostView : UIView, sectionInsets : UIEdgeInsets = .zero) -> CGSize{
         var width = viewSize.width

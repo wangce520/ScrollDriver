@@ -25,7 +25,16 @@ extension CSScrollDriver : UITableViewDataSource, UITableViewDelegate {
         var cell : UITableViewCell
         cell = tableView.dequeueReusableCell(withIdentifier: viewModel.reuseIndentifier(), for: indexPath)
         if let _cell = cell as? CSScrollItemViewProtocol {
-            viewModel.excuteConfigAction(_cell)
+            // 配置点击事件
+            if let eventAction = viewModel.eventAction {
+                _cell.configEventAction?(eventAction)
+            }
+            // 配置代理
+            _cell.configDelegate?(viewModel.delegate as Any)
+            // 配置数据
+            _cell.configDataModel?(viewModel.dataModel)
+            // 配置indexPath
+            _cell.configIndexPath?(indexPath, sectionCount: data[indexPath.section].count)
         }
         return cell
     }
@@ -46,7 +55,7 @@ extension CSScrollDriver : UITableViewDataSource, UITableViewDelegate {
     // 设置HeaderView
     public func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let sectionViewModel = data[section]
-        return _headerFooterViewFor(tableView, viewModel: sectionViewModel.headerViewModel)
+        return _headerFooterViewFor(tableView, viewModel: sectionViewModel.headerViewModel, sectionCount : sectionViewModel.count)
     }
     
     // 设置HeaderView的高度
@@ -59,7 +68,7 @@ extension CSScrollDriver : UITableViewDataSource, UITableViewDelegate {
     // 设置FooterView
     public func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
         let sectionViewModel = data[section]
-        return _headerFooterViewFor(tableView, viewModel: sectionViewModel.footerViewModel)
+        return _headerFooterViewFor(tableView, viewModel: sectionViewModel.footerViewModel, sectionCount : sectionViewModel.count)
     }
     
     // 设置FooterView的高度
@@ -70,11 +79,20 @@ extension CSScrollDriver : UITableViewDataSource, UITableViewDelegate {
     }
     
     // 设置HeaderView|FooterView
-    public func _headerFooterViewFor(_ tableView : UITableView, viewModel : CSScrollItemViewModel?) -> UITableViewHeaderFooterView? {
+    public func _headerFooterViewFor(_ tableView : UITableView, viewModel : CSScrollItemViewModel?, sectionCount : Int) -> UITableViewHeaderFooterView? {
         guard let viewModel = viewModel else { return nil}
         guard let view = tableView.dequeueReusableHeaderFooterView(withIdentifier: viewModel.reuseIndentifier()) else { return nil }
         if let _view = view as? CSScrollItemViewProtocol {
-            viewModel.excuteConfigAction(_view)
+            // 配置点击事件
+            if let eventAction = viewModel.eventAction {
+                _view.configEventAction?(eventAction)
+            }
+            // 配置代理
+            _view.configDelegate?(viewModel.delegate as Any)
+            // 配置数据
+            _view.configDataModel?(viewModel.dataModel)
+            // 配置indexPath
+            _view.configIndexPath?(nil, sectionCount: sectionCount)
         }
         return view
     }

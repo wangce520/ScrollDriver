@@ -27,7 +27,16 @@ extension CSScrollDriver : UICollectionViewDataSource, UICollectionViewDelegate 
         var cell : UICollectionViewCell
         cell = collectionView.dequeueReusableCell(withReuseIdentifier: viewModel.reuseIndentifier(), for: indexPath)
         if let _cell = cell as? CSScrollItemViewProtocol {
-            viewModel.excuteConfigAction(_cell)
+            // 配置点击事件
+            if let eventAction = viewModel.eventAction {
+                _cell.configEventAction?(eventAction)
+            }
+            // 配置代理
+            _cell.configDelegate?(viewModel.delegate as Any)
+            // 配置数据
+            _cell.configDataModel?(viewModel.dataModel)
+            // 配置indexPath
+            _cell.configIndexPath?(indexPath, sectionCount: data[indexPath.section].count)
         }
         return cell
     }
@@ -39,7 +48,16 @@ extension CSScrollDriver : UICollectionViewDataSource, UICollectionViewDelegate 
         if let viewModel = (kind == UICollectionView.elementKindSectionHeader ? sectionViewModel.headerViewModel : sectionViewModel.footerViewModel) {
             let view = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: viewModel.reuseIndentifier(), for: indexPath)
             if let _view = view as? CSScrollItemViewProtocol {
-                viewModel.excuteConfigAction(_view)
+                // 配置点击事件
+                if let eventAction = viewModel.eventAction {
+                    _view.configEventAction?(eventAction)
+                }
+                // 配置代理
+                _view.configDelegate?(viewModel.delegate as Any)
+                // 配置数据
+                _view.configDataModel?(viewModel.dataModel)
+                // 配置indexPath
+                _view.configIndexPath?(nil, sectionCount: sectionViewModel.count)
             }
             return view
         } else {
